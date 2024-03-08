@@ -23,12 +23,17 @@ user.addEventListener("change" , function(){
 
 function save (){
     if (changeWhenOccurs){
-        let save = document.querySelector("#history")
-        save.innerHTML +=user.value + " : " +  count + "<br>" 
-        document.querySelector("#count").innerHTML = 0;
-        count = 0;
-        changeWhenOccurs = false;
-        reset()
+        if (count == 0){
+            document.querySelector("#warning").innerHTML="points must be over 0. please add some points";
+        }else{
+            let save = document.querySelector("#history")
+            save.innerHTML +=user.value + " : " +  count + "<br>" 
+            document.querySelector("#count").innerHTML = 0;
+            count = 0;
+            changeWhenOccurs = false;
+            reset()
+        }
+        
     }
     else{
         document.querySelector("#warning").innerHTML="please enter username";
@@ -36,10 +41,14 @@ function save (){
 }
 
 function reset(){
+    count = 0;
     user.value = "";
     document.querySelector("#count").innerHTML= 0;
     if (document.querySelector("#warning").innerHTML=="please enter username"){
         document.querySelector("#warning").innerHTML="";
+    }
+    if (document.querySelector("#warning").innerHTML=="points must be over 0. please add some points"){
+        document.querySelector("#warning").innerHTML=""
     }
 
 }
